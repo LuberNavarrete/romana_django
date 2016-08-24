@@ -1,0 +1,15 @@
+#contenedor{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#user{
+	float: right;
+	width: 300px;
+	height: 50px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 30px;
+	margin-right: 30px;
+	display: flex;
+}

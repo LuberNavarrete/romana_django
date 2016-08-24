@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Romana{% endblock %}
+{% block content %}
+	<h1>Romana</h1>
+	<div class = "romana-form">
+		<form action = "{% url 'romana_add' %}" method = "POST">
+			{{ form.as_p }}
+			{% csrf_token %}
+			<p><input type = "submit" value = "Guardar"></p>
+		</form>
+	</div>
+{% endblock %}

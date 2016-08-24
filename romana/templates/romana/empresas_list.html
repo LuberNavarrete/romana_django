@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Empresas{% endblock %}
+{% block content %}
+	<center><h1>Empresas</h1></center>
+	<div>
+		<form action = "./" class = "navbar-form navbar-left">
+			<div class = "form-group">
+				<input type = "text" class = "form-control" placeholder = "Rif Empresa">
+			</div>
+			<button class = "btn btn-default">
+				<span class = "glyphicon glyphicon-search"> Buscar</span>
+			</button>
+		</form>
+	</div>
+	<table class = "table table-bordered table-striped table-hover table-condensed">
+		<tr>
+			<th>Rif</th>
+			<th>Nombre</th>
+			<th>Observación</th>
+			<th>Activo</th>
+			<th>Acciones</th>
+		</tr>
+		{% for empresa in empresas %}
+			<tr>
+				<td>{{ empresa.rif }}</td>
+    			<td>{{ empresa.nombre }}</td>
+    			<td>{{ empresa.observacion }}</td>
+    			<td>
+					{% if empresa.activo %}
+						<span class = "glyphicon glyphicon-ok-sign"></span>
+					{% else %}
+						<span class = "glyphicon glyphicon-minus-sign"></span>
+					{% endif %}
+    			</td>
+    			<td>
+					<span class = "glyphicon glyphicon-pencil"></span>
+					<!-- No existe borrado solo desactivar registro
+					<span class = "glyphicon glyphicon-remove"></span> -->
+    			</td>
+    		</tr>
+    	{% empty %}
+			<p>No hay datos que mostrar</p>
+		{% endfor %}
+	</table>
+	<nav>
+    {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+                <li {% if page_obj.number == i %} class="active" {% endif %}>
+                    <a href="?page={{i}}">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</nav>
+	<div align = "right">
+		<a href = "{% url 'empresas_add' %}">
+			<input type = "button" class = "btn btn-success" value = "Agregar Empresa">
+		</a>
+	</div>
+{% endblock %}

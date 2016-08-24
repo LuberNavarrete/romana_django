@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Autenticacion{% endblock %}
+{% block content %}
+	<h1>Autenticacion</h1>
+	{% if form.errors %}
+		<p>Su usuario y clave no coinciden. Por favor intente nuevamente</p>
+	{% else %}
+		<p>Use el siguiente formulario para autenticarse</p>
+	{% endif %}
+	<div class = "login">
+		<form action = "{% url 'login' %}" method = "POST">
+			{{ form.as_p }}
+			{% csrf_token %}
+			<input type = "hidden" name = "next" value = "{{ next }}">
+			<p><input type = "submit" value = "Autenticarse"></p>
+		</form>
+	</div>
+{% endblock %}

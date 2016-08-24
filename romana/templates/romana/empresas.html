@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Empresas{% endblock %}
+{% block content %}
+	<h1>Empresas</h1>
+	<div class = "empresa-form">
+		<form action = "{% url 'empresas_add' %}" method = "POST">
+			{{ form.as_p }}
+			{% csrf_token %}
+			<p><input type = "submit" value = "Guardar"></p>
+		</form>
+	</div>
+{% endblock %}

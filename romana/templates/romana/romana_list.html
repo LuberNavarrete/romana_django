@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Romana{% endblock %}
+{% block content %}
+	<center><h1>Roamana</h1></center>
+	<div>
+		<form action = "./" class = "navbar-form navbar-left">
+			<div class = "form-group">
+				<input type = "text" class = "form-control" placeholder = "Guia Romana">
+			</div>
+			<button class = "btn btn-default">
+				<span class = "glyphicon glyphicon-search"> Buscar</span>
+			</button>
+		</form>
+	</div>
+	<table class = "table table-bordered table-striped table-hover table-condensed">
+		<tr>
+			<th>empresa</th>
+			<th>chofer</th>
+			<th>hora_entrada</th>
+			<th>hora_salida</th>
+			<th>guia</th>
+			<th>peso tara</th>
+			<th>peso neto</th>
+			<th>Observación</th>
+			<th>Activo</th>
+			<th>Acciones</th>
+		</tr>
+		{% for romana in romanas %}
+			<tr>
+				<td>{{ romana.empresa }}</td>
+    			<td>{{ romana.chofer }}</td>
+    			<td>{{ romana.hora_entrada }}</td>
+    			<td>{{ romana.hora_salida }}</td>
+    			<td>{{ romana.guia }}</td>
+    			<td>{{ romana.peso_tara }}</td>
+    			<td>{{ romana.peso_neto }}</td>
+    			<td>{{ romana.observacion }}</td>
+    			<td>
+					{% if romana.activo %}
+						<span class = "glyphicon glyphicon-ok-sign"></span>
+					{% else %}
+						<span class = "glyphicon glyphicon-minus-sign"></span>
+					{% endif %}
+    			</td>
+    			<td>
+					<span class = "glyphicon glyphicon-pencil"></span>
+					<!-- No existe borrado solo desactivar registro
+					<span class = "glyphicon glyphicon-remove"></span> -->
+    			</td>
+    		</tr>
+    	{% empty %}
+			<p>No hay datos que mostrar</p>
+		{% endfor %}
+	</table>
+	<nav>
+    {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+                <li {% if page_obj.number == i %} class="active" {% endif %}>
+                    <a href="?page={{i}}">{{ i }}</a>
+                </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</nav>
+	<div align = "right">
+		<a href = "{% url 'romana_add' %}">
+			<input type = "button" class = "btn btn-success" value = "Agregar Romana">
+		</a>
+	</div>
+{% endblock %}
