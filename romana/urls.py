@@ -11,10 +11,10 @@ urlpatterns = [
 	# Index
 	url(r'^$', login_required(views.home.as_view()), name = 'home'),
 	# CreateViews
-	url(r'^empresasagregar$', views.empresa_add, name = 'empresas_add'),
+	# url(r'^empresasagregar$', views.empresa_add, name = 'empresas_add'),
 	# url(r'^romanaagregar$', views.romana_add, name = 'romana_add'),
 	# ListViews
-	url(r'^empresas/$', login_required(views.Empresas.as_view()), name = 'empresa_list'),
+	# url(r'^empresas/$', login_required(views.Empresas.as_view()), name = 'empresa_list'),
 	url(r'^choferes/$', login_required(views.Choferes.as_view()), name = 'chofer_list'),
 	url(r'^romana/$', login_required(views.Romana.as_view()), name = 'romana_list'),
 ]
